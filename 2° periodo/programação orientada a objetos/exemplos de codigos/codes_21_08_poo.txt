@@ -1,0 +1,37 @@
+class Main {
+    public static void main(String[] args) {
+        String nome1 = "Pedro Paulo Silva";
+        String nome2 = "Joana da Costa";
+        
+        String [] nome_parts;
+        nome1 = nome1.toLowerCase();
+        nome_parts = nome1.split(" ");
+        String email1;
+        
+        email1 = nome_parts[0] + "." + nome_parts[nome_parts.length-1] + "@ufrn.br";
+        
+        System.out.println(email1);
+        
+    }
+
+// Online Java Compiler
+// Use this editor to write, compile and run your Java code online
+-----------------------------------------------------------------------------
+class Main {
+    public static void main(String[] args) {
+        
+        String [] nomes = {"Pedro Paulo Silva",
+            "Joana da Costa"
+        };
+        String [] nome_parts;
+        String [] emails = new String[nomes.length];
+        for (int i = 0; i < nomes.length; i++) {
+            nomes[i] = nomes[i].toLowerCase();
+            System.out.print(nomes[i] + ":");
+            nome_parts = nomes[i].split(" ");
+            /*for (int j=0;j<nome_parts.length;j++) {
+                System.out.println(nome_parts[j]);
+            }*/
+            emails[i] = nome_parts[0] + "." + nome_parts[nome_parts.length-1] + "@ufrn.br";
+            System.out.println(" " + emails[i]);
+        }
