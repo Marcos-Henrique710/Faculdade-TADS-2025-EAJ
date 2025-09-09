@@ -4,7 +4,7 @@
 ![GitHub repo size](https://img.shields.io/github/repo-size/Marcos-Henrique710/Faculdade-TADS-2025-EAJ)  
 ![GitHub last commit](https://img.shields.io/github/last-commit/Marcos-Henrique710/Faculdade-TADS-2025-EAJ)  
 
-Repositório criado para organizar e armazenar todas as atividades, listas resolvidas, slides e exemplos de código desenvolvidos durante o curso de **Tecnologia em Análise e Desenvolvimento de Sistemas (TADS)** da **Escola Agrícola de Jundiaí (EAJ/UFRN)** no ano de 2025.  
+Repositório criado para organizar e armazenar todas as atividades, listas resolvidas, slides e exemplos de código desenvolvidos durante o curso de **Tecnólogo em Análise e Desenvolvimento de Sistemas (TADS)** da **Escola Agrícola de Jundiaí (EAJ/UFRN)** no ano de 2025.  
 
 Este repositório funciona como um **portfólio acadêmico**, documentando o aprendizado em cada disciplina e servindo como base de estudo para futuras revisões.  
 
