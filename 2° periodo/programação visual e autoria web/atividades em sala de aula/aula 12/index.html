@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calcular IMC</title>
+</head>
+<body>
+    <form id="formIMC">
+        <fieldset>
+            <legend>
+                Preencha os dados:
+            </legend>
+            
+            <input type="number" step="0.1" name="Peso" id="Peso" placeholder="Peso (em kg)" required>
+            <input type="number" step="0.01" name="Altura" id="Altura" placeholder="Altura (em metros)" required>
+            <button type="submit">Calcular IMC</button>
+            <button type="reset">Limpar</button>
+        </fieldset>
+    </form>
+
+    <p id="resultado"></p>
+
+    <script>
+        document.getElementById("formIMC").addEventListener("submit", function(event){
+            event.preventDefault(); // impede o envio do formulário
+
+            let peso = parseFloat(document.getElementById("Peso").value);
+            let altura = parseFloat(document.getElementById("Altura").value);
+            let resultado = document.getElementById("resultado");
+
+            if(isNaN(peso) || isNaN(altura) || altura <= 0){
+                resultado.textContent = "Por favor, preencha os campos corretamente.";
+                return;
+            }
+
+            let imc = peso / (altura * altura);
+            let classificacao = "";
+
+            if(imc < 18.5){
+                classificacao = "Abaixo do peso";
+            } else if(imc < 24.9){
+                classificacao = "Peso normal";
+            } else if(imc < 29.9){
+                classificacao = "Sobrepeso";
+            } else if(imc < 34.9){
+                classificacao = "Obesidade grau I";
+            } else if(imc < 39.9){
+                classificacao = "Obesidade grau II";
+            } else {
+                classificacao = "Obesidade grau III";
+            }
+
+            resultado.textContent = `Seu IMC é ${imc.toFixed(2)} (${classificacao})`;
+        });
+    </script>
+</body>
+</html>
