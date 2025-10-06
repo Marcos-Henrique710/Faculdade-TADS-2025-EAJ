@@ -1,0 +1,40 @@
+<!--
+Crie  um  código  em  Javascript  que  receba  os  nomes  de  5  pessoas  através  de  campos  de 
+formulário. Ao clicar em um botão Inverter, armazene-os em um array e apresente os valores 
+nos  mesmos  campos  do  formulário,  porém  na  ordem  inversa  da  que  foram  inicialmente 
+digitados.
+-->
+
+<!DOCTYPE html>
+    <html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Questão 6</title>
+    </head>
+    <body>
+
+        <h2>Formulário de Nomes</h2>
+
+        <form id="formNomes">
+            <label>Nome 1:</label><br>
+            <input type="text" id="nome1"><br><br>
+
+            <label>Nome 2:</label><br>
+            <input type="text" id="nome2"><br><br>
+
+            <label>Nome 3:</label><br>
+            <input type="text" id="nome3"><br><br>
+
+            <label>Nome 4:</label><br>
+            <input type="text" id="nome4"><br><br>
+
+            <label>Nome 5:</label><br>
+            <input type="text" id="nome5"><br><br>
+
+            <button type="button" onclick="inverterNomes()">Inverter</button>
+        </form>
+
+        <script src="script.js"></script>
+    </body>
+</html>
