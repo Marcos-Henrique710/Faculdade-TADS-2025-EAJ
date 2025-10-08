@@ -1,0 +1,54 @@
+<!-- Crie uma página contendo um determinado texto (pode ser qualquer texto da internet).
+Acima do texto, inclua um formulário com um campo e um botão Pesquisar. Ao digitar uma
+palavra dentro do campo e pressionar o botão Pesquisar, conte quantas ocorrências daquela
+palavra existem ao longo do texto e destaque cada ocorrência com um plano de fundo amarelo
+(conforme esse exemplo: palavra). Caso a palavra não exista no texto, exiba uma mensagem
+abaixo do campo de texto indicando que a busca não retornou nenhum resultado. -->
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Questão 12</title>
+<style>
+body{font-family: Arial, Helvetica, sans-serif;line-height:1.6;margin:24px}
+label{display:block;margin-bottom:8px}
+input[type="text"]{padding:8px;width:300px}
+button{padding:8px 12px;margin-left:8px}
+.highlight{background: yellow}
+.status{margin-top:10px;font-weight:600}
+.text-container{margin-top:18px;border:1px solid #ddd;padding:16px;border-radius:6px}
+</style>
+</head>
+<body>
+<h1>Buscar e destacar palavra</h1>
+
+
+<form id="searchForm" action="#" onsubmit="return false">
+<label for="query">Digite a palavra que deseja buscar:</label>
+<input id="query" type="text" placeholder="Ex.: palavra" />
+<button id="btnSearch" type="submit">Pesquisar</button>
+<div id="status" class="status" aria-live="polite"></div>
+</form>
+
+
+<div class="text-container" id="content">
+<p id="text">
+Tigre Tigre, queimando intensamente,
+Nas florestas da noite;
+Que mão ou olho imortal,
+Poderia moldar tua simetria assustadora?
+</p>
+
+<p>
+Autoria web é o processo de criação e desenvolvimento de páginas e aplicações
+para a World Wide Web, utilizando tecnologias como HTML para a estrutura, CSS para o estilo
+e JavaScript para a interatividade. Para começar na autoria web, é essencial aprender
+essas linguagens fundamentais, familiarizar-se com ferramentas como editores de
+código (Ex: Visual Studio Code), e entender os conceitos de arquitetura cliente-servidor
+e o funcionamento da web. 
+</p>
+</div>
+<script src="script.js"></script>
+</body>
+</html>

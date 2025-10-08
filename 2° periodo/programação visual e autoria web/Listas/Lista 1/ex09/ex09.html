@@ -1,0 +1,29 @@
+<!-- Crie uma função em JavaScript que receba 2 palavras através de campos de formulário e
+depois imprima-as intercaladas em um outro campo de formulário que deve está desabilitado
+(o usuário não deve conseguir digitar nenhum valor nesse campo). Ex.: ‘Joao’ e ‘Mary’; a
+impressão deve ser: ‘JMoaaroy’. -->
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Questão 9</title>
+</head>
+<body>
+  <h3>Intercalação de Palavras</h3>
+
+  <form onsubmit="return false;">
+    <label>Primeira palavra:</label>
+    <input type="text" id="palavra1"><br><br>
+
+    <label>Segunda palavra:</label>
+    <input type="text" id="palavra2"><br><br>
+
+    <label>Resultado:</label>
+    <input type="text" id="resultado" disabled><br><br>
+
+    <button type="button" onclick="intercalar()">Intercalar</button>
+  </form>
+    <script src="script.js"></script>
+</body>
+</html>

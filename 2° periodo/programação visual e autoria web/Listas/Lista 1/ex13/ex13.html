@@ -1,0 +1,25 @@
+<!-- Faça um script que receba uma data no formato “dd/mm/aaaa” e escreva a data por
+extenso. Dica: use a função “split” de uma string que quebra a string em pedaços dado um
+separador como argumento da função. Nesse caso, o separador é a barra (/) da data. Exemplo:
+Para a entrada “06/09/2024” deve ser escrito “06 de setembro de 2024”. -->
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Questão 13</title>
+</head>
+<body>
+
+<h2>Converter Data por Extenso</h2>
+
+<form>
+  <label>Digite a data (dd/mm/aaaa):</label><br>
+  <input type="text" id="data" placeholder="Ex: 06/09/2024">
+  <button type="button" onclick="converterData()">Converter</button>
+</form>
+
+<p id="resultado"></p>
+<script src="script.js"></script>
+</body>
+</html>

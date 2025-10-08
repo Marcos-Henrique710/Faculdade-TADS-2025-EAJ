@@ -1,0 +1,25 @@
+<!-- Escreva um script que receba um número fornecido pelo usuário através de um formulário
+exiba em forma de tabela a sua tabuada de multiplicação. -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Questão 11</title>
+</head>
+<body>
+
+<h2>Tabuada</h2>
+
+<form onsubmit="gerarTabuada(); return false;">
+  <label>Digite um número:</label>
+  <input type="number" id="numero" required>
+  <input type="submit" value="Gerar Tabuada">
+</form>
+
+<br>
+
+<div id="resultado"></div>
+<script src="script.js"></script>
+</body>
+</html>
