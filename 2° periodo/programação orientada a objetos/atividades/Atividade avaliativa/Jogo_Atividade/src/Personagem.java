@@ -18,7 +18,5 @@ public abstract class Personagem {
         vitalidade = vitalidade - 10;
     }
 
-    public void aplicarGolpeEspecial(Personagem personagem) {
-
-    }
+    public abstract void aplicarGolpeEspecial();
 }
