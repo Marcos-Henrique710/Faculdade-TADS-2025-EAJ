@@ -28,9 +28,46 @@ confirmados” ou “Ver pedidos entregues” para consultar todos os pedidos em
 atendidos, respectivamente.  
 */
 
+import java.util.*;
 
 public class App {
     public static void main(String[] args) throws Exception {
-        System.out.println("Hello, World!");
+        System.out.println("================= MENU BOTIJAO DE GAS =================");
+        System.out.println("1 - Fazer pedido");
+        System.out.println("2 - Confirmar entrega");
+        System.out.println("3 - Ver pedidos confirmados");
+        System.out.println("4 - Ver pedidos entregues");
+        System.out.println("5 - Sair");
+        System.out.println("=======================================================");
+
+        Scanner scanner = new Scanner(System.in);
+        int opcao;
+        do {
+            System.out.print("Digite a opcao desejada: ");
+            opcao = scanner.nextInt();
+            scanner.nextLine();
+            scanner.close();
+
+            switch (opcao) {
+                case 1:
+                    System.out.println("Fazer pedido selecionado.");
+                    
+                    break;
+                case 2:
+                    System.out.println("Confirmar entrega selecionado.");
+                    break;
+                case 3:
+                    System.out.println("Ver pedidos confirmados selecionado.");
+                    break;
+                case 4:
+                    System.out.println("Ver pedidos entregues selecionado.");
+                    break;
+                case 5:
+                    System.out.println("Saindo do sistema. Obrigado!");
+                    break;
+                default:
+                    System.out.println("Opcao invalida. Tente novamente.");
+            }
+        } while (opcao != 5);
     }
 }
