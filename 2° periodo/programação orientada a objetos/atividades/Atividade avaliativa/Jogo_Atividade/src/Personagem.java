@@ -1,6 +1,6 @@
 public abstract class Personagem {
     private String nome;
-    private int vitalidade = 100; 
+    private Integer vitalidade = 100; 
     private Jogo jogo;
 
     public Personagem() {
@@ -13,10 +13,11 @@ public abstract class Personagem {
         return nome;
     }
 
-    
-    public void aplicarGolpeNormal(Personagem personagem) {
-        vitalidade = vitalidade - 10;
+    public Integer getVitalidade() {
+        return vitalidade;
     }
+    
+    //public void aplicarGolpeNormal(Personagem personagem);
 
-    public abstract void aplicarGolpeEspecial();
+    //public abstract void aplicarGolpeEspecial();
 }

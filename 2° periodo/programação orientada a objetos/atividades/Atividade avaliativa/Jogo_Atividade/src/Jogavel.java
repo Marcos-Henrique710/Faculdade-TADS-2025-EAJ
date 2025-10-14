@@ -1,5 +1,5 @@
-public class Jogavel {
-    private int nivel;
+public class Jogavel extends ersonagem {
+    private int nivel = 1;
 
     public void botaoA(Personagem personagem) {
         
