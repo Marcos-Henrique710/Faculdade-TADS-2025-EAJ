@@ -1,7 +1,10 @@
 public abstract class Controle extends Jogavel {
-     
-    public  void botaoA();
-    abstract void botaoB();
 
+    public Integer botaoA(Personagem personagem) {
+        return getVitalidade();
+    }
+    
+    public abstract void botaoB();
+    
 }
 

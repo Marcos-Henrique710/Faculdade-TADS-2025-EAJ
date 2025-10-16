@@ -1,12 +1,7 @@
-public class NaoJogavel {
+public class NaoJogavel extends Personagem {
     private boolean Aliado;
 
     public boolean getAliado(){
-        this.Aliado = Aliado;
-        return Aliado;
-    }
-
-    public void setAliado(boolean aliado) {
-        Aliado = aliado;
+        return this.Aliado;
     }
 }

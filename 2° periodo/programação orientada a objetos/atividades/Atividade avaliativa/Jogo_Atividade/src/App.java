@@ -14,6 +14,5 @@ public class App {
 
         System.out.println("Iniciando o jogo...");
         
-        
     }
 }
