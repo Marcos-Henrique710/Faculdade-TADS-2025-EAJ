@@ -34,6 +34,8 @@ public abstract class Personagem extends Jogo {
         return jogo;
     }
 
-    public Class verificarVitalidade() { )
+    /*public Class verificarVitalidade() {
+        
     }
+    */
 }
