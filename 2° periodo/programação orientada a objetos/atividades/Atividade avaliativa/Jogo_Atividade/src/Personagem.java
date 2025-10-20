@@ -1,13 +1,13 @@
 public abstract class Personagem extends Jogo {
     private String nome;
-    private Integer vitalidade; 
+    private int vitalidade; 
     private Jogo jogo;
     
     public Personagem() {
         //construtor vazio para nao da erro
     }
 
-    public Personagem(String nome, Integer vitalidade, Jogo jogo) {
+    public Personagem(String nome, int vitalidade, Jogo jogo) {
         this.nome = nome;
         this.vitalidade = vitalidade;
         this.jogo = jogo;
@@ -17,7 +17,7 @@ public abstract class Personagem extends Jogo {
         return nome;
     }
 
-    public Integer getVitalidade() {
+    public int getVitalidade() {
         return vitalidade;
     }
 
@@ -25,7 +25,7 @@ public abstract class Personagem extends Jogo {
         this.vitalidade = 100;
     }
 
-    public Integer aplicarGolpeNormal(Integer vitalidade) {
+    public int aplicarGolpeNormal(Integer vitalidade) {
         this.vitalidade -= 10;
         return this.vitalidade;
     }
@@ -33,9 +33,4 @@ public abstract class Personagem extends Jogo {
     public Jogo getJogo() {
         return jogo;
     }
-
-    /*public Class verificarVitalidade() {
-        
-    }
-    */
 }
