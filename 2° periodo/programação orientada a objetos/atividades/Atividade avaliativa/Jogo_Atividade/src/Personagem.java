@@ -33,4 +33,14 @@ public abstract class Personagem extends Jogo {
     public Jogo getJogo() {
         return jogo;
     }
+
+    public void vitalidadezero() {
+        if (this.vitalidade <= 0) {
+            System.out.println("Fim de jogo");
+            System.exit(0);
+        }else {
+            System.out.println("Vitalidade restante: " + this.vitalidade);
+        }
+    }
+
 }
