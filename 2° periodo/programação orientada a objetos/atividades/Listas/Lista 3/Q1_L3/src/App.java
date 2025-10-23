@@ -28,46 +28,108 @@ confirmados” ou “Ver pedidos entregues” para consultar todos os pedidos em
 atendidos, respectivamente.  
 */
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 public class App {
-    public static void main(String[] args) throws Exception {
-        System.out.println("================= MENU BOTIJAO DE GAS =================");
-        System.out.println("1 - Fazer pedido");
-        System.out.println("2 - Confirmar entrega");
-        System.out.println("3 - Ver pedidos confirmados");
-        System.out.println("4 - Ver pedidos entregues");
-        System.out.println("5 - Sair");
-        System.out.println("=======================================================");
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+        ArrayList<Pedido> pedidos = new ArrayList<>();
 
-        Scanner scanner = new Scanner(System.in);
+        double precoBotijao = 130.00;
         int opcao;
+
         do {
-            System.out.print("Digite a opcao desejada: ");
-            opcao = scanner.nextInt();
-            scanner.nextLine();
-            scanner.close();
+            System.out.println("\n===== MENU =====");
+            System.out.println("1. Fazer pedido");
+            System.out.println("2. Confirmar entrega");
+            System.out.println("3. Ver pedidos confirmados");
+            System.out.println("4. Ver pedidos entregues");
+            System.out.println("0. Sair");
+            System.out.print("Escolha: ");
+            opcao = input.nextInt();
+            input.nextLine();
 
             switch (opcao) {
-                case 1:
-                    System.out.println("Fazer pedido selecionado.");
-                    
-                    break;
-                case 2:
-                    System.out.println("Confirmar entrega selecionado.");
-                    break;
-                case 3:
-                    System.out.println("Ver pedidos confirmados selecionado.");
-                    break;
-                case 4:
-                    System.out.println("Ver pedidos entregues selecionado.");
-                    break;
-                case 5:
-                    System.out.println("Saindo do sistema. Obrigado!");
-                    break;
-                default:
-                    System.out.println("Opcao invalida. Tente novamente.");
+                case 1 -> {
+                    System.out.println("\n=== Fazer Pedido ===");
+                    System.out.print("Endereço de entrega: ");
+                    String endereco = input.nextLine();
+
+                    System.out.print("Quantidade de botijões: ");
+                    int quantidade = input.nextInt();
+                    input.nextLine();
+
+                    Pedido novo = new Pedido(endereco, quantidade, precoBotijao);
+                    System.out.println("\nResumo do pedido:");
+                    novo.exibirInfo();
+
+                    System.out.print("Deseja alterar o endereço? (s/n): ");
+                    String resp = input.nextLine();
+                    if (resp.equalsIgnoreCase("s")) {
+                        System.out.print("Novo endereço: ");
+                        String novoEnd = input.nextLine();
+                        novo.alterarEndereco(novoEnd);
+                        System.out.println("Endereço atualizado!");
+                        novo.exibirInfo();
+                    }
+
+                    System.out.print("Confirmar pedido? (s/n): ");
+                    String confirmar = input.nextLine();
+                    if (confirmar.equalsIgnoreCase("s")) {
+                        System.out.print("Digite o numero do cartao de credito: ");
+                        String cartao = input.nextLine();
+                        novo.confirmarPedido(cartao);
+                        pedidos.add(novo);
+                        System.out.println("Pedido confirmado Codigo: " + novo.getCodigo());
+                    } else {
+                        System.out.println("Pedido cancelado.");
+                    }
+                }
+
+                case 2 -> {
+                    System.out.print("\nDigite o codigo do pedido para confirmar entrega: ");
+                    int cod = input.nextInt();
+                    boolean encontrado = false;
+
+                    for (Pedido p : pedidos) {
+                        if (p.getCodigo() == cod) {
+                            p.entregar();
+                            System.out.println("Pedido " + cod + " marcado como ENTREGUE!");
+                            encontrado = true;
+                            break;
+                        }
+                    }
+
+                    if (!encontrado) {
+                        System.out.println("Pedido nao localizado.");
+                    }
+                }
+
+                case 3 -> {
+                    System.out.println("\n=== Pedidos Confirmados ===");
+                    for (Pedido p : pedidos) {
+                        if (p.getStatus().equals("confirmado")) {
+                            p.exibirInfo();
+                        }
+                    }
+                }
+
+                case 4 -> {
+                    System.out.println("\n=== Pedidos Entregues ===");
+                    for (Pedido p : pedidos) {
+                        if (p.getStatus().equals("entregue")) {
+                            p.exibirInfo();
+                        }
+                    }
+                }
+
+                case 0 -> System.out.println("Encerrando o sistema...");
+                default -> System.out.println("Opcao invalida!");
             }
-        } while (opcao != 5);
+
+        } while (opcao != 0);
+
+        input.close();
     }
 }
