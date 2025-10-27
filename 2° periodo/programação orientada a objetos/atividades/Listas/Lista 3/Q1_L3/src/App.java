@@ -51,7 +51,7 @@ public class App {
             input.nextLine();
 
             switch (opcao) {
-                case 1 -> {
+                case 1: {
                     System.out.println("\n=== Fazer Pedido ===");
                     System.out.print("Endereço de entrega: ");
                     String endereco = input.nextLine();
@@ -87,7 +87,7 @@ public class App {
                     }
                 }
 
-                case 2 -> {
+                case 2: {
                     System.out.print("\nDigite o codigo do pedido para confirmar entrega: ");
                     int cod = input.nextInt();
                     boolean encontrado = false;
@@ -106,7 +106,7 @@ public class App {
                     }
                 }
 
-                case 3 -> {
+                case 3: {
                     System.out.println("\n=== Pedidos Confirmados ===");
                     for (Pedido p : pedidos) {
                         if (p.getStatus().equals("confirmado")) {
@@ -115,7 +115,7 @@ public class App {
                     }
                 }
 
-                case 4 -> {
+                case 4: {
                     System.out.println("\n=== Pedidos Entregues ===");
                     for (Pedido p : pedidos) {
                         if (p.getStatus().equals("entregue")) {
@@ -124,8 +124,8 @@ public class App {
                     }
                 }
 
-                case 0 -> System.out.println("Encerrando o sistema...");
-                default -> System.out.println("Opcao invalida!");
+                case 0: System.out.println("Encerrando o sistema...");
+                default: System.out.println("Opcao invalida!");
             }
 
         } while (opcao != 0);
