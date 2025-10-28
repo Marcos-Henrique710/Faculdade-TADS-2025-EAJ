@@ -13,11 +13,11 @@ ilustração a seguir:
 public class Robo {
     private String linha;
     private String coluna;
-    private String passo;
+    private int passo;
 
-    public Robo(String linha, String coluna, String passo) {
-        this.linha = linha;
-        this.coluna = coluna;
+    public Robo(String linha, String coluna, int passo) {
+        this.linha = 0;
+        this.coluna = 0;
         this.passo = passo;
     }
     
@@ -37,11 +37,39 @@ public class Robo {
         this.coluna = coluna;
     }
 
-    public String getPasso() {
+    public int getPasso() {
         return passo;
     }
 
-    public void setPasso(String passo) {
+    public void setPasso(int passo) {
         this.passo = passo;
+    }
+    
+    public void mostrarPosicaoAtual() {
+        System.out.println("A posicao atual eh: " "("+ linha ", "+ coluna ")");
+    }
+
+    public int andarFrente(int passo) {
+        System.out.println("O robo andou para frente");
+        passo += passo;
+        return passo;
+    }
+    
+    public int andarAtras(int passo) {
+        System.out.println("O robo andou para tras");
+        passo -= passo;
+        return passo;
+    }
+    
+    public int andarEsquerda(int passo) {
+        System.out.println("O robo andou para a esquerda");
+        passo += passo;
+        return passo;
+    }
+
+    public int andarDireita(int passo) {
+        System.out.println("O robo andou para a direita");
+        passo += passo;
+        return passo;
     }
 }
