@@ -11,45 +11,61 @@ ilustração a seguir:
 
 
 public class Robo {
-    private String linha;
-    private String coluna;
-    private String passo;
+    private int linha;
+    private int coluna;
+    private int passo;
 
-    public Robo(String linha, String coluna, String passo) {
+    public Robo(int linha, int coluna, int passo) {
         this.linha = linha;
         this.coluna = coluna;
         this.passo = passo;
     }
-    
-    public String getLinha() {
+
+    public int getLinha() {
         return linha;
     }
 
-    public void setLinha(String linha) {
+    public void setLinha(int linha) {
         this.linha = linha;
     }
 
-    public String getColuna() {
+    public int getColuna() {
         return coluna;
     }
 
-    public void setColuna(String coluna) {
+    public void setColuna(int coluna) {
         this.coluna = coluna;
     }
 
-    public String getPasso() {
+    public int getPasso() {
         return passo;
     }
 
-    public void setPasso(String passo) {
+    public void setPasso(int passo) {
         this.passo = passo;
     }
 
     public void mostrarPosicaoAtual() {
-        System.out.println("Posição Atual do Robô: Linha " + linha + ", Coluna " + coluna);
+        System.out.println("A posição atual é: (" + linha + ", " + coluna + ")");
     }
 
-    public void andarFrente(String linha, String coluna) {
-        System.out.println("");
+    public void moverParaFrente() {
+        linha += passo;
+        System.out.println("O robô andou para frente para linha " + linha);
+    }
+
+    public void moverParaTras() {
+        linha -= passo;
+        System.out.println("O robô andou para trás para linha " + linha);
+    }
+
+    public void moverParaEsquerda() {
+        coluna -= passo;
+        System.out.println("O robô andou para a esquerda para coluna " + coluna);
+    }
+
+    public void moverParaDireita() {
+        coluna += passo;
+        System.out.println("O robô andou para a direita para coluna " + coluna);
     }
 }
