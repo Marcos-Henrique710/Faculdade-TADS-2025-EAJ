@@ -44,4 +44,12 @@ public class Robo {
     public void setPasso(String passo) {
         this.passo = passo;
     }
+
+    public void mostrarPosicaoAtual() {
+        System.out.println("Posição Atual do Robô: Linha " + linha + ", Coluna " + coluna);
+    }
+
+    public void andarFrente(String linha, String coluna) {
+        System.out.println("");
+    }
 }
