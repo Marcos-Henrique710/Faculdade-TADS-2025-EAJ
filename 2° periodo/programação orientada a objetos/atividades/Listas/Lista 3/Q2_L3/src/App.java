@@ -24,6 +24,9 @@ public class App {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         int escolha; 
+        
+        Robo robo = new Robo(0, 0, 1);
+        Sala sala = new Sala(40, 20);
 
         do {
             System.out.println("================== Robo na sala ==================");
@@ -32,7 +35,8 @@ public class App {
             System.out.println("1 - Andar para Frente");
             System.out.println("2 - Andar para Tras");
             System.out.println("3 - Andar para Direita");
-            System.out.println("4 - Andar para Esquerda\n");
+            System.out.println("4 - Andar para Esquerda");
+            System.out.println("5 - Sair\n");
             System.out.print("Digite sua escolha: ");
 
             escolha = scanner.nextInt(); 
@@ -40,21 +44,41 @@ public class App {
             switch (escolha) {
                 case 1:
                     System.out.println("Robo andou para frente");
+                    robo.moverParaFrente();
+                    sala.limparTela();
+                    sala.desenhar();
+                    robo.mostrarPosicaoAtual();
                     break;
                 case 2:
                     System.out.println("Robo andou para tras");
+                    robo.moverParaTras();
+                    sala.limparTela();
+                    sala.desenhar();
+                    robo.mostrarPosicaoAtual();
                     break;
                 case 3:
                     System.out.println("Robo andou para direita");
+                    robo.moverParaDireita();
+                    sala.limparTela();
+                    sala.desenhar();
+                    robo.mostrarPosicaoAtual();
                     break;
                 case 4:
                     System.out.println("Robo andou para esquerda");
+                    robo.moverParaEsquerda();
+                    sala.limparTela();
+                    sala.desenhar();
+                    robo.mostrarPosicaoAtual();
+                    break;
+                case 5:
+                System.out.print("\033[H\033[2J");
+                    System.out.println("Saindo do programa...");
                     break;
                 default:
                     System.out.println("Opcao invalida! Digite novamente\n");
             }
 
-        } while (escolha < 1 || escolha > 4);
+        } while (escolha != 5);
 
         scanner.close();
     }
