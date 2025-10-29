@@ -71,7 +71,7 @@ public class App {
                     robo.mostrarPosicaoAtual();
                     break;
                 case 5:
-                System.out.print("\033[H\033[2J");
+                    System.out.print("\033[H\033[2J");
                     System.out.println("Saindo do programa...");
                     break;
                 default:
