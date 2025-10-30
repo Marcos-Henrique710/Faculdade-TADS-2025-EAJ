@@ -46,26 +46,38 @@ public class Robo {
     }
 
     public void mostrarPosicaoAtual() {
-        System.out.println("A posição atual é: (" + linha + ", " + coluna + ")");
+        System.out.println("A posicao atual eh: (" + linha + ", " + coluna + ")");
     }
 
-    public void moverParaFrente() {
-        linha += passo;
-        System.out.println("O robô andou para frente para linha " + linha);
-    }
-
-    public void moverParaTras() {
+    public void moverParaFrente(Sala sala) {
         linha -= passo;
-        System.out.println("O robô andou para trás para linha " + linha);
+        if (linha <= 0) { // verificar se bateu na parede de cima
+            linha = 1;
+            System.out.println("O robo bateu na parede e voltou");
+        }
     }
 
-    public void moverParaEsquerda() {
+    public void moverParaTras(Sala sala) {
+        linha += passo;
+        if (linha >= sala.getAltura() - 1) { // verificar se bateu na parede de baixo
+            linha = sala.getAltura() - 2;
+            System.out.println("O robo bateu na parede e voltou");
+        }
+    }
+
+    public void moverParaEsquerda(Sala sala) {
         coluna -= passo;
-        System.out.println("O robô andou para a esquerda para coluna " + coluna);
+        if (coluna <= 0) { // verificar se bateu na parede da esquerda
+            coluna = 1;
+            System.out.println("O robo bateu na parede e voltou");
+        }
     }
 
-    public void moverParaDireita() {
+    public void moverParaDireita(Sala sala) {
         coluna += passo;
-        System.out.println("O robô andou para a direita para coluna " + coluna);
+        if (coluna >= sala.getLargura() - 1) { // verificar se bateu na parede da esquerda
+            coluna = sala.getLargura() - 2;
+            System.out.println("O robo bateu na parede e voltou");
+        }
     }
 }

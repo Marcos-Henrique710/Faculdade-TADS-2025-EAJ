@@ -25,8 +25,8 @@ public class App {
         Scanner scanner = new Scanner(System.in);
         int escolha; 
         
-        Robo robo = new Robo(0, 0, 1);
-        Sala sala = new Sala(40, 20);
+        Robo robo = new Robo(1, 1, 1); // começa na posição (1,1) com passo 1, mas nao pode ser (0,0) pq ultrapaça a parede
+        Sala sala = new Sala(40, 10, robo);
 
         do {
             System.out.println("================== Robo na sala ==================");
@@ -44,28 +44,28 @@ public class App {
             switch (escolha) {
                 case 1:
                     System.out.println("Robo andou para frente");
-                    robo.moverParaFrente();
+                    robo.moverParaFrente(sala);
                     sala.limparTela();
                     sala.desenhar();
                     robo.mostrarPosicaoAtual();
                     break;
                 case 2:
                     System.out.println("Robo andou para tras");
-                    robo.moverParaTras();
+                    robo.moverParaTras(sala);
                     sala.limparTela();
                     sala.desenhar();
                     robo.mostrarPosicaoAtual();
                     break;
                 case 3:
                     System.out.println("Robo andou para direita");
-                    robo.moverParaDireita();
+                    robo.moverParaDireita(sala);
                     sala.limparTela();
                     sala.desenhar();
                     robo.mostrarPosicaoAtual();
                     break;
                 case 4:
                     System.out.println("Robo andou para esquerda");
-                    robo.moverParaEsquerda();
+                    robo.moverParaEsquerda(sala);
                     sala.limparTela();
                     sala.desenhar();
                     robo.mostrarPosicaoAtual();
