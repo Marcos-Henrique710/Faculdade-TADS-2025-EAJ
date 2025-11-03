@@ -3,4 +3,11 @@
 próprios; */
 public class C3 extends C1{
     private String BotaoA; 
+    private String BotaoB;
+    
+    public C3(){
+        this.BotaoA = "Botao A";
+        this.BotaoB = "Botao B";
+    }
+
 }
