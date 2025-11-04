@@ -20,8 +20,26 @@ para a “tela” de coletar dados dos jogadores.
 i) Considere modelar o problema em UML com classes Dado, Player, Game etc. 
 */
 
+import java.util.*;
+
 public class App {
     public static void main(String[] args) throws Exception {
-        System.out.println("Hello, World!");
+
+        System.out.println("Bem-vindo ao jogo dos dados!");
+        System.out.println("Digite seu username para comecar:");
+
+        Scanner scanner = new Scanner(System.in);
+        String username = scanner.nextLine();
+        
+        System.out.println("Digite o numero que deseja apostar (somente entre 1 e 12): ");
+        int aposta = scanner.nextInt();
+
+        while (aposta < 1 || aposta > 12) {
+            System.out.println("numero invalido! Digite novamente:");
+            aposta = scanner.nextInt();
+        }
+
+        System.out.println("Username:\n" + username + " Apostou no numero: " + aposta);
+        scanner.close();
     }
 }
