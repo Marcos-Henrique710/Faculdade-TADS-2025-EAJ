@@ -6,13 +6,21 @@ public class App {
         System.out.println("Escolha a dificuldade: Fácil, Médio ou Difícil");
 
         Scanner sc = new Scanner(System.in);
-
         String dificuldade = sc.nextLine();
-        
+
+        System.out.println("Escolha o nome do seu personagem: ");
+
+        Scanner scanner = new Scanner(System.in);
+        String nomeJogador = scanner.nextLine();
+
         Jogo jogo = new Jogo(dificuldade);
-        sc.close();
+
+        ArrayList<String> listadePersonagens = new ArrayList<>();
+
+        listadePersonagens.add("player1");
+        
 
         System.out.println("Iniciando o jogo...");
-        
+        sc.close();
     }
 }
