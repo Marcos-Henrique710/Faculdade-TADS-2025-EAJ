@@ -19,7 +19,33 @@ contendo pelo menos um objeto de cada classe concreta.
 */
 
 public class App {
-    public static void main(String[] args) throws Exception {
-        System.out.println("Hello, World!");
+    public static void main(String[] args) {
+
+        // C2
+        C2 objC2 = new C2("ObjetoC2", 10);
+        objC2.exibirInfo();
+        objC2.mostrarValor();
+
+        // C3 (interfaces, sobrecarga e sobreposição)
+        C3 objC3 = new C3("ContaC3", 150.0);
+        objC3.exibirInfo();
+        objC3.depositar(50.0);
+        objC3.depositar(100.0, "PIX");
+        objC3.metodoI1();
+        objC3.metodoA();
+        objC3.metodoB();
+
+        // C4
+        C4 objC4 = new C4("ProdutoC4", 25, "Produto de teste");
+        objC4.exibirInfo();
+        objC4.mostrarDescricao();
+
+        // C5 (implementa I1)
+        C5 objC5 = new C5("UsuarioC5", 99, false);
+        objC5.exibirInfo();
+        objC5.metodoI1();
+        objC5.ativar();
+
+        System.out.println("\nTeste concluido com sucesso!");
     }
 }
