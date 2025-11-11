@@ -1,0 +1,163 @@
+{
+  "coffee": [
+    {
+      "title": "Black Coffee",
+      "description": "Café preto puro, feito apenas com grãos moídos e água quente. É simples e ideal para apreciar o sabor natural do café.",
+      "ingredients": ["Café"],
+      "price": 3.0,
+      "image": "https://images.unsplash.com/photo-1494314671902-399b18174975?auto=format&fit=crop&q=80&w=1887&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "id": 1
+    },
+    {
+      "title": "Latte",
+      "description": "Uma mistura cremosa de espresso e leite vaporizado, com uma fina camada de espuma por cima. Pode ser servido puro ou com sabores adicionais, como baunilha ou caramelo.",
+      "ingredients": ["Espresso", "Leite vaporizado"],
+      "price": 4.5,
+      "image": "https://images.unsplash.com/photo-1561882468-9110e03e0f78?auto=format&fit=crop&q=60&w=800&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTl8fGxhdHRlfGVufDB8fDB8fHww",
+      "id": 2
+    },
+    {
+      "title": "Caramel Latte",
+      "description": "Uma versão doce e indulgente do latte, com calda de caramelo que complementa a cremosidade do leite vaporizado.",
+      "ingredients": ["Espresso", "Leite vaporizado", "Calda de caramelo"],
+      "price": 5.0,
+      "image": "https://images.unsplash.com/photo-1599398054066-846f28917f38?auto=format&fit=crop&q=80&w=1887&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "id": 3
+    },
+    {
+      "title": "Cappuccino",
+      "description": "Combinação equilibrada de espresso, leite vaporizado e uma espessa camada de espuma, frequentemente decorado com cacau em pó ou canela.",
+      "ingredients": ["Espresso", "Leite vaporizado", "Espuma"],
+      "price": 4.75,
+      "image": "https://images.unsplash.com/photo-1557006021-b85faa2bc5e2?auto=format&fit=crop&q=80&w=1887&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "id": 4
+    },
+    {
+      "title": "Americano",
+      "description": "Uma dose de espresso diluída em água quente, oferecendo um sabor semelhante ao café preto, mas com menos intensidade.",
+      "ingredients": ["Espresso", "Água quente"],
+      "price": 3.5,
+      "image": "https://images.unsplash.com/photo-1532004491497-ba35c367d634?auto=format&fit=crop&q=80&w=1887&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "id": 5
+    },
+    {
+      "title": "Espresso",
+      "description": "Café concentrado e aromático, servido em pequenas porções. Ideal para quem busca energia imediata.",
+      "ingredients": ["Espresso"],
+      "price": 2.5,
+      "image": "https://images.unsplash.com/photo-1579992357154-faf4bde95b3d?auto=format&fit=crop&q=80&w=1887&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "id": 6
+    },
+    {
+      "title": "Macchiato",
+      "description": "Uma dose de espresso com uma pequena quantidade de espuma de leite no topo, trazendo um equilíbrio delicado.",
+      "ingredients": ["Espresso", "Espuma"],
+      "price": 3.25,
+      "image": "https://images.unsplash.com/photo-1557772611-722dabe20327?auto=format&fit=crop&q=80&w=1887&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "id": 7
+    },
+    {
+      "title": "Mocha",
+      "description": "Uma bebida rica e indulgente, que combina espresso, chocolate e leite vaporizado. Ideal para os amantes de chocolate.",
+      "ingredients": ["Espresso", "Leite vaporizado", "Chocolate"],
+      "price": 5.5,
+      "image": "https://images.unsplash.com/photo-1607260550778-aa9d29444ce1?auto=format&fit=crop&q=80&w=1887&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "id": 8
+    },
+    {
+      "title": "Hot Chocolate",
+      "description": "Nos dias frios de inverno, uma xícara de chocolate quente te fará sentir confortável e feliz. Também proporciona energia graças à cafeína presente.",
+      "ingredients": ["Chocolate", "Leite"],
+      "image": "https://images.unsplash.com/photo-1542990253-0d0f5be5f0ed?auto=format&fit=crop&q=60&w=800&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NDh8fGhvdCUyMGNob2NvbGF0ZXxlbnwwfHwwfHx8MA%3D%3D",
+      "price": 15.0,
+      "id": 9
+    },
+    {
+      "title": "Chai Latte",
+      "description": "Se você procura uma bebida quente e cheia de sabor no inverno, escolha o chai latte. A combinação de cardamomo e canela oferece um sabor incrível.",
+      "ingredients": ["Chá", "Leite", "Gengibre", "Cardamomo", "Canela"],
+      "image": "https://images.unsplash.com/photo-1578899952107-9c390f1af1b7?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fGNoYWklMjBsYXR0ZXxlbnwwfHwwfHx8MA%3D%3D",
+      "price": 18.0,
+      "id": 10
+    },
+    {
+      "title": "Matcha Latte",
+      "description": "Matcha latte é uma bebida verde e saudável, feita com chá matcha em pó e leite. Oferece um leve toque doce, sabor único e um estímulo suave de cafeína.",
+      "ingredients": ["Pó de matcha", "Leite", "Açúcar*"],
+      "image": "https://images.unsplash.com/photo-1536256263959-770b48d82b0a?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8bWF0Y2hhJTIwbGF0dGV8ZW58MHx8MHx8fDA%3D",
+      "price": 19.5,
+      "id": 11
+    },
+    {
+      "title": "Seasonal Brew",
+      "description": "Café sazonal com diferentes notas de sabor como caramelo, frutas e chocolate.",
+      "ingredients": ["Café"],
+      "image": "https://images.unsplash.com/photo-1611162458324-aae1eb4129a4?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTg1fHxibGFjayUyMGNvZmZlZXxlbnwwfHwwfHx8MA%3D%3D",
+      "price": 12.0,
+      "id": 12
+    },
+    {
+      "title": "Svart Te",
+      "description": "O chá preto nasceu na China. É feito de folhas da planta Camellia e pode ser aromatizado com frutas, entre outros ingredientes. Uma bebida agradável, quente, saborosa e aromática, ideal para o dia a dia.",
+      "ingredients": ["Chá"],
+      "image": "https://images.unsplash.com/photo-1576092768241-dec231879fc3?auto=format&fit=crop&q=60&w=800&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjB8fHRlYXxlbnwwfHwwfHx8MA%3D%3D",
+      "price": 8.5,
+      "id": 13
+    },
+    {
+      "title": "Islatte",
+      "description": "O iced latte é uma bebida de café gelada feita misturando espresso e leite frio. É servida com cubos de gelo e também é conhecida como cafè latte iced ou latte on the rocks.",
+      "ingredients": ["Espresso", "Leite", "Gelo", "Xarope"],
+      "image": "https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?auto=format&fit=crop&q=60&w=800&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8aWNlZCUyMGxhdHRlfGVufDB8fDB8fHww",
+      "price": 16.0,
+      "id": 14
+    },
+    {
+      "title": "Islatte Mocha",
+      "description": "O iced latte mocha é uma combinação de latte e mocha, que mistura chocolate e café. Oferece aos amantes de bebidas geladas uma experiência deliciosa.",
+      "ingredients": ["Espresso", "Gelo", "Leite", "Chocolate"],
+      "image": "https://images.unsplash.com/photo-1642647391072-6a2416f048e5?auto=format&fit=crop&q=60&w=800&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mzh8fGljZWQlMjBtb2NoYSUyMGxhdHRlfGVufDB8fDB8fHww",
+      "price": 17.5,
+      "id": 15
+    },
+    {
+      "title": "Frapino Caramel",
+      "description": "Um café gelado batido com gelo, leite e calda de caramelo, finalizado com chantilly e uma camada extra de calda para um toque especial.",
+      "ingredients": [
+        "Café",
+        "Gelo",
+        "Leite",
+        "Calda de caramelo",
+        "Chantilly",
+        "Cobertura de caramelo"
+      ],
+      "image": "https://images.unsplash.com/photo-1662047102608-a6f2e492411f?auto=format&fit=crop&q=60&w=800&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8ZnJhcGlubyUyMGNhcmFtZWx8ZW58MHx8MHx8fDA%3D",
+      "price": 15.9,
+      "id": 16
+    },
+    {
+      "title": "Frapino Mocka",
+      "description": "Uma bebida gelada à base de café, leite e chocolate, misturada com gelo e finalizada com chantilly e um toque de cacau.",
+      "ingredients": ["Café", "Gelo", "Leite", "Chocolate", "Chantilly"],
+      "image": "https://images.unsplash.com/photo-1530373239216-42518e6b4063?auto=format&fit=crop&q=60&w=800&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8ZnJhcGlubyUyMG1vY2hhfGVufDB8fDB8fHww",
+      "price": 16.5,
+      "id": 17
+    },
+    {
+      "title": "Apelsinjuice",
+      "description": "Suco de laranja fresco feito com laranjas recém-espremidas, servido gelado para uma experiência refrescante e natural.",
+      "ingredients": ["Laranjas frescas", "Gelo"],
+      "image": "https://images.unsplash.com/photo-1600271886742-f049cd451bba?auto=format&fit=crop&q=60&w=800&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NzF8fG9yYW5nZSUyMGp1aWNlfGVufDB8fDB8fHww",
+      "price": 8.9,
+      "id": 18
+    },
+    {
+      "title": "Frozen Lemonade",
+      "description": "Uma limonada frozen refrescante que combina suco de limão fresco, gelo e um toque de doçura para o verão.",
+      "ingredients": ["Suco de limão", "Gelo", "Açúcar"],
+      "image": "https://images.unsplash.com/photo-1523371054106-bbf80586c38c?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fGxlbW9uYWRlJTIwd2l0aCUyMGljZXxlbnwwfHwwfHx8MA%3D%3D",
+      "price": 10.0,
+      "id": 19
+    }
+  ]
+}
