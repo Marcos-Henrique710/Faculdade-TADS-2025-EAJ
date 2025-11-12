@@ -1,14 +1,436 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="Style.css">
-        <title>Document</title>
-    </head>
-    <body>
-        <div id="root" class="products-container"></div>
-        <Script src="Script.js"></Script>
-        <h1>olá, mundo</h1>
-    </body>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Loja de Cafés — Trabalho 3</title>
+  <!-- Bootstrap CSS (CDN) -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    /* Pequenos ajustes */
+    .coffee-card img { max-height: 180px; object-fit: cover; }
+    .ingredient-badge { margin-right: 4px; }
+    .cart-badge { position: relative; top: -10px; left: -6px; }
+    .pointer { cursor: pointer; }
+    main { padding: 1rem 0; }
+    footer { padding: 1rem 0; text-align:center; color: #777; }
+  </style>
+</head>
+<body>
+  <!-- Somente esta div; todo o resto é gerado via JS -->
+  <div id="root"></div>
+
+  <script>
+  /*****************************************************************************
+   * Single-file SPA for "Trabalho 3" (HTML + vanilla JS)
+   * Views: index (list), cart, checkout
+   * Cart persistence: localStorage key 'cart'
+   * API: fetch http://localhost:3000/cafes  (fallback data used if fetch falhar)
+   *****************************************************************************/
+
+  // ---------------------- Utilitários ----------------------
+  const $ = sel => document.querySelector(sel);
+  const money = v => (typeof v === 'number' ? v.toLocaleString('pt-BR', {style:'currency', currency:'BRL'}) : v);
+
+  // LocalStorage cart helpers
+  const CART_KEY = 'cart';
+  function loadCart() {
+    try {
+      const raw = localStorage.getItem(CART_KEY);
+      return raw ? JSON.parse(raw) : {};
+    } catch {
+      return {};
+    }
+  }
+  function saveCart(cart) { localStorage.setItem(CART_KEY, JSON.stringify(cart)); }
+  function cartCount() {
+    const cart = loadCart();
+    return Object.values(cart).reduce((s, it) => s + (it.qty||0), 0);
+  }
+  function cartTotal() {
+    const cart = loadCart();
+    return Object.values(cart).reduce((s, it) => s + (it.qty * it.price), 0);
+  }
+
+  // ---------------------- Dados / API ----------------------
+  // Endpoint conforme instrução do trabalho
+  const API_URL = 'http://localhost:3000/cafes';
+
+  const fallbackCoffees = [
+    {
+      id: 1,
+      title: "Black Coffee",
+      description: "Café preto puro, feito apenas com grãos moídos e água quente. É simples e ideal para apreciar o sabor natural do café.",
+      ingredients: ["Café"],
+      price: 3.0,
+      image: "https://images.unsplash.com/photo-1494314671902-399b18174975?auto=format&fit=crop&q=80&w=800"
+    },
+    {
+      id: 2,
+      title: "Latte",
+      description: "Uma mistura cremosa de espresso e leite vaporizado, com uma fina camada de espuma por cima.",
+      ingredients: ["Espresso", "Leite vaporizado"],
+      price: 4.5,
+      image: "https://images.unsplash.com/photo-1561882468-9110e03e0f78?auto=format&fit=crop&q=80&w=800"
+    }
+  ];
+
+  async function fetchCoffees() {
+    try {
+      const res = await fetch(API_URL, {cache:'no-store'});
+      if (!res.ok) throw new Error('API não respondeu corretamente');
+      const data = await res.json();
+      // alguns json-server usam "coffee" ou "cafes" — tolerância:
+      if (Array.isArray(data)) return data;
+      if (data.cafes) return data.cafes;
+      if (data.coffee) return data.coffee;
+      // se tiver objeto com chave 'cafes' dentro do corpo
+      return Array.isArray(data.cafes) ? data.cafes : fallbackCoffees;
+    } catch (err) {
+      console.warn('Falha ao acessar API local, usando dados de fallback.', err);
+      return fallbackCoffees;
+    }
+  }
+
+  // ---------------------- UI: header / footer ----------------------
+  function renderHeader() {
+    const count = cartCount();
+    return `
+      <header class="bg-light border-bottom">
+        <nav class="container d-flex align-items-center justify-content-between py-2">
+          <div class="d-flex align-items-center gap-3">
+            <a href="#/" class="text-decoration-none text-dark fs-4 fw-bold">CoffeeShop</a>
+          </div>
+          <div class="d-flex align-items-center gap-3">
+            <div class="position-relative pointer" id="cart-toggle" title="Ver carrinho">
+              <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
+                <path d="M0 1.5A.5.5 0 0 1 .5 1h1a.5.5 0 0 1 .485.379L2.89 5H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 14H4a.5.5 0 0 1-.491-.408L1.01 2H.5a.5.5 0 0 1-.5-.5zM3.14 6l1.25 6.25a.5.5 0 0 0 .49.375H13l1.2-6.4H3.14z"/>
+              </svg>
+              <span class="badge bg-danger cart-badge" id="cart-count">${count}</span>
+            </div>
+          </div>
+        </nav>
+      </header>
+    `;
+  }
+
+  function renderFooter() {
+    return `
+      <footer class="mt-4">
+        <div class="container">
+          <small>Projeto: Front end para uma loja — Exemplo em JS puro</small>
+        </div>
+      </footer>
+    `;
+  }
+
+  // ---------------------- Views ----------------------
+  // Home / index: lista de cafés
+  function renderCoffeeList(coffees) {
+    const listHtml = coffees.map(c => `
+      <div class="col-sm-6 col-lg-4 mb-4">
+        <div class="card coffee-card h-100">
+          <img src="${c.image || ''}" class="card-img-top" alt="${escapeHTML(c.title)}" onerror="this.style.opacity=.6;this.src='https://via.placeholder.com/400x250?text=Imagem'">
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title">${escapeHTML(c.title)}</h5>
+            <p class="card-text small text-muted">${escapeHTML(c.description ?? '')}</p>
+            <div class="mb-2">
+              ${Array.isArray(c.ingredients) ? c.ingredients.map(ing => `<span class="badge bg-secondary ingredient-badge">${escapeHTML(ing)}</span>`).join(' ') : ''}
+            </div>
+            <div class="mt-auto d-flex justify-content-between align-items-center">
+              <strong>${money(c.price)}</strong>
+              <button class="btn btn-sm btn-primary add-to-cart" data-id="${c.id}" data-title="${escapeAttr(c.title)}" data-price="${c.price}" data-img="${escapeAttr(c.image || '')}">
+                Adicionar
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    `).join('');
+
+    return `
+      <main class="container">
+        <h2 class="mb-3">Cafés</h2>
+        <div class="row">
+          ${listHtml}
+        </div>
+      </main>
+    `;
+  }
+
+  // Cart view
+  function renderCartView() {
+    const cart = loadCart();
+    const items = Object.values(cart);
+    if (items.length === 0) {
+      return `
+        <main class="container">
+          <h2 class="mb-3">Carrinho</h2>
+          <div class="alert alert-info">Seu carrinho está vazio. Volte à <a href="#/">loja</a> para adicionar cafés.</div>
+        </main>
+      `;
+    }
+
+    const rows = items.map(it => `
+      <li class="list-group-item d-flex align-items-center justify-content-between">
+        <div class="d-flex align-items-center gap-3">
+          <img src="${escapeAttr(it.image||'')}" alt="${escapeAttr(it.title)}" style="width:64px;height:48px;object-fit:cover" onerror="this.src='https://via.placeholder.com/64x48?text=IMG'">
+          <div>
+            <div class="fw-bold">${escapeHTML(it.title)}</div>
+            <div class="small text-muted">${money(it.price)}</div>
+          </div>
+        </div>
+        <div class="d-flex align-items-center gap-2">
+          <div class="input-group input-group-sm" style="width:120px">
+            <button class="btn btn-outline-secondary btn-sm decrease-qty" data-id="${it.id}" type="button">−</button>
+            <input type="text" class="form-control form-control-sm text-center qty-input" data-id="${it.id}" value="${it.qty}" style="padding: .25rem .5rem;">
+            <button class="btn btn-outline-secondary btn-sm increase-qty" data-id="${it.id}" type="button">+</button>
+          </div>
+          <div class="text-end" style="min-width:120px">
+            <div><strong>${money(it.price * it.qty)}</strong></div>
+            <button class="btn btn-sm btn-link text-danger remove-item" data-id="${it.id}">Remover</button>
+          </div>
+        </div>
+      </li>
+    `).join('');
+
+    return `
+      <main class="container">
+        <h2 class="mb-3">Carrinho</h2>
+        <ul class="list-group mb-3">
+          ${rows}
+        </ul>
+        <div class="d-flex justify-content-between align-items-center">
+          <div><strong>Total:</strong> ${money(cartTotal())}</div>
+          <div>
+            <a href="#/checkout" class="btn btn-success">Finalizar Compra</a>
+            <button id="clear-cart" class="btn btn-outline-danger">Limpar Carrinho</button>
+          </div>
+        </div>
+      </main>
+    `;
+  }
+
+  // Checkout view
+  function renderCheckoutView() {
+    const cart = loadCart();
+    const items = Object.values(cart);
+    if (items.length === 0) {
+      return `
+        <main class="container">
+          <h2 class="mb-3">Finalização</h2>
+          <div class="alert alert-info">Seu carrinho está vazio. Adicione itens antes de finalizar.</div>
+        </main>
+      `;
+    }
+
+    const list = items.map(it => `<li class="list-group-item d-flex justify-content-between"><div>${escapeHTML(it.title)} <small class="text-muted">x${it.qty}</small></div><div>${money(it.price * it.qty)}</div></li>`).join('');
+
+    return `
+      <main class="container">
+        <h2 class="mb-3">Finalização de Compra</h2>
+
+        <div class="row">
+          <div class="col-md-6">
+            <h5>Itens</h5>
+            <ul class="list-group mb-3">
+              ${list}
+              <li class="list-group-item d-flex justify-content-between"><strong>Total</strong><strong>${money(cartTotal())}</strong></li>
+            </ul>
+          </div>
+          <div class="col-md-6">
+            <h5>Endereço e Pagamento</h5>
+            <form id="checkout-form" novalidate>
+              <div class="mb-3">
+                <label class="form-label">Endereço de entrega</label>
+                <input type="text" class="form-control" id="addr" required>
+                <div class="invalid-feedback">Informe o endereço de entrega.</div>
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Método de pagamento</label>
+                <select class="form-select" id="payment" required>
+                  <option value="">Selecione...</option>
+                  <option value="card">Cartão de crédito</option>
+                  <option value="boleto">Boleto</option>
+                  <option value="pix">PIX</option>
+                </select>
+                <div class="invalid-feedback">Selecione uma forma de pagamento.</div>
+              </div>
+              <div class="d-flex gap-2">
+                <button type="submit" class="btn btn-primary">Finalizar</button>
+                <a href="#/cart" class="btn btn-outline-secondary">Voltar ao Carrinho</a>
+              </div>
+            </form>
+            <div id="checkout-msg" class="mt-3"></div>
+          </div>
+        </div>
+      </main>
+    `;
+  }
+
+  // ---------------------- Sanitizers (pequena proteção) ----------------------
+  function escapeHTML(s) {
+    if (!s && s !== 0) return '';
+    return String(s).replace(/[&<>"'`=\/]/g, function (c) {
+      return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;','/':'&#x2F;','`':'&#x60;','=':'&#x3D;'}[c];
+    });
+  }
+  function escapeAttr(s) { return escapeHTML(s).replace(/"/g, '&quot;'); }
+
+  // ---------------------- Router / render ----------------------
+  let coffeesCache = null;
+
+  async function render() {
+    const root = document.getElementById('root');
+    const hash = location.hash.replace('#','') || '/';
+    // header always
+    let inner = '';
+    inner += renderHeader();
+
+    if (hash === '/' || hash === '' || hash.startsWith('/?')) {
+      // home
+      if (!coffeesCache) coffeesCache = await fetchCoffees();
+      inner += renderCoffeeList(coffeesCache);
+    } else if (hash.startsWith('/cart')) {
+      inner += renderCartView();
+    } else if (hash.startsWith('/checkout')) {
+      inner += renderCheckoutView();
+    } else {
+      inner += `<main class="container"><h2>404</h2><p>Pagina não encontrada</p></main>`;
+    }
+
+    inner += renderFooter();
+    root.innerHTML = inner;
+    attachHandlers(); // attach after render to wire events
+    updateCartCountUI();
+  }
+
+  window.addEventListener('hashchange', () => render());
+
+  // initial render
+  render();
+
+  // ---------------------- Handlers / Events ----------------------
+  function updateCartCountUI() {
+    const el = document.getElementById('cart-count');
+    if (el) el.textContent = cartCount();
+  }
+
+  function attachHandlers() {
+    // Add to cart buttons (Home)
+    document.querySelectorAll('.add-to-cart').forEach(btn => {
+      btn.addEventListener('click', e => {
+        const id = String(btn.dataset.id);
+        const title = btn.dataset.title;
+        const price = parseFloat(btn.dataset.price) || 0;
+        const image = btn.dataset.img || '';
+        const cart = loadCart();
+        if (!cart[id]) cart[id] = { id, title, price, qty: 0, image };
+        cart[id].qty = (cart[id].qty || 0) + 1;
+        saveCart(cart);
+        updateCartCountUI();
+        // pequeno feedback
+        btn.classList.add('btn-success');
+        setTimeout(()=>btn.classList.remove('btn-success'), 500);
+      });
+    });
+
+    // Cart icon click -> go to cart
+    const cartToggle = document.getElementById('cart-toggle');
+    if (cartToggle) {
+      cartToggle.addEventListener('click', () => { location.hash = '#/cart'; });
+    }
+
+    // Cart page controls
+    document.querySelectorAll('.increase-qty').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const id = btn.dataset.id;
+        const cart = loadCart();
+        if (cart[id]) { cart[id].qty++; saveCart(cart); render(); }
+      });
+    });
+    document.querySelectorAll('.decrease-qty').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const id = btn.dataset.id;
+        const cart = loadCart();
+        if (cart[id]) {
+          cart[id].qty = Math.max(0, cart[id].qty - 1);
+          if (cart[id].qty === 0) delete cart[id];
+          saveCart(cart); render();
+        }
+      });
+    });
+    document.querySelectorAll('.remove-item').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const id = btn.dataset.id;
+        const cart = loadCart();
+        if (cart[id]) { delete cart[id]; saveCart(cart); render(); }
+      });
+    });
+    // qty manual input
+    document.querySelectorAll('.qty-input').forEach(input => {
+      input.addEventListener('change', () => {
+        const id = input.dataset.id;
+        const v = parseInt(input.value) || 0;
+        const cart = loadCart();
+        if (v <= 0) { delete cart[id]; }
+        else cart[id].qty = v;
+        saveCart(cart); render();
+      });
+    });
+
+    const clearBtn = document.getElementById('clear-cart');
+    if (clearBtn) {
+      clearBtn.addEventListener('click', () => {
+        if (confirm('Deseja limpar todo o carrinho?')) {
+          localStorage.removeItem(CART_KEY);
+          render();
+        }
+      });
+    }
+
+    // Checkout form submit
+    const checkoutForm = document.getElementById('checkout-form');
+    if (checkoutForm) {
+      checkoutForm.addEventListener('submit', (ev) => {
+        ev.preventDefault();
+        const addr = document.getElementById('addr');
+        const payment = document.getElementById('payment');
+        let valid = true;
+        if (!addr.value.trim()) { addr.classList.add('is-invalid'); valid = false; } else { addr.classList.remove('is-invalid'); }
+        if (!payment.value) { payment.classList.add('is-invalid'); valid = false; } else { payment.classList.remove('is-invalid'); }
+
+        if (!valid) return;
+
+        // finaliza compra: snapshot e limpar localStorage
+        const cart = loadCart();
+        const snapshot = { items: Object.values(cart), total: cartTotal(), address: addr.value.trim(), payment: payment.value, date: new Date().toISOString() };
+
+        // aqui você poderia enviar para um backend; por ora mostramos confirmação e limpamos localStorage
+        localStorage.removeItem(CART_KEY);
+
+        const msgEl = document.getElementById('checkout-msg');
+        msgEl.innerHTML = `
+          <div class="alert alert-success">
+            <h5>Compra confirmada!</h5>
+            <p>Resumo: <strong>${money(snapshot.total)}</strong> — Método: ${escapeHTML(snapshot.payment)}<br>
+            Entrega em: ${escapeHTML(snapshot.address)}<br>
+            Data: ${new Date(snapshot.date).toLocaleString()}</p>
+          </div>
+        `;
+        // permitir o usuário voltar para loja
+        setTimeout(() => { render(); location.hash = '#/'; }, 1500);
+      });
+    }
+  }
+
+  // ---------------------- Pequenas melhorias UX ----------------------
+  // Se o usuário fechar a aba, mantemos o cart (localStorage já persiste).
+  // Suporte para atualizar o contador quando outra aba modifica o localStorage:
+  window.addEventListener('storage', (ev) => {
+    if (ev.key === CART_KEY) updateCartCountUI();
+  });
+
+  </script>
+</body>
 </html>
